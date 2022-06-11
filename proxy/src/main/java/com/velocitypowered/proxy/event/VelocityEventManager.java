@@ -23,9 +23,7 @@ import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.benmanes.caffeine.cache.LoadingCache;
 import com.google.common.base.VerifyException;
 import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ListMultimap;
-import com.google.common.collect.Multimap;
 import com.google.common.reflect.TypeToken;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.velocitypowered.api.event.Continuation;
@@ -66,15 +64,15 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.lanternpowered.lmbda.LambdaFactory;
 import org.lanternpowered.lmbda.LambdaType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class VelocityEventManager implements EventManager {
 
-  private static final Logger logger = LogManager.getLogger(VelocityEventManager.class);
+  private static final Logger logger = LoggerFactory.getLogger(VelocityEventManager.class);
 
   private static final MethodHandles.Lookup methodHandlesLookup = MethodHandles.lookup();
   private static final LambdaType<EventTaskHandler> untargetedEventTaskHandlerType =

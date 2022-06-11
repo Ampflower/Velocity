@@ -44,13 +44,13 @@ import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class AuthSessionHandler implements MinecraftSessionHandler {
 
-  private static final Logger logger = LogManager.getLogger(AuthSessionHandler.class);
+  private static final Logger logger = LoggerFactory.getLogger(AuthSessionHandler.class);
 
   private final VelocityServer server;
   private final MinecraftConnection mcConnection;

@@ -44,14 +44,14 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class StatusSessionHandler implements MinecraftSessionHandler {
 
-  private static final Logger logger = LogManager.getLogger(StatusSessionHandler.class);
+  private static final Logger logger = LoggerFactory.getLogger(StatusSessionHandler.class);
   private static final QuietRuntimeException EXPECTED_AWAITING_REQUEST = new QuietRuntimeException(
-      "Expected connection to be awaiting status request");
+          "Expected connection to be awaiting status request");
 
   private final VelocityServer server;
   private final MinecraftConnection connection;
@@ -59,7 +59,7 @@ public class StatusSessionHandler implements MinecraftSessionHandler {
   private boolean pingReceived = false;
 
   StatusSessionHandler(VelocityServer server, MinecraftConnection connection,
-      InboundConnection inbound) {
+                       InboundConnection inbound) {
     this.server = server;
     this.connection = connection;
     this.inbound = inbound;

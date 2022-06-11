@@ -22,12 +22,12 @@ import java.util.Arrays;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
 import joptsimple.OptionSpec;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public final class ProxyOptions {
-  private static final Logger logger = LogManager.getLogger(ProxyOptions.class);
+  private static final Logger logger = LoggerFactory.getLogger(ProxyOptions.class);
   private final boolean help;
   private final @Nullable Integer port;
 
@@ -35,10 +35,10 @@ public final class ProxyOptions {
     final OptionParser parser = new OptionParser();
 
     final OptionSpec<Void> help = parser.acceptsAll(Arrays.asList("h", "help"), "Print help")
-        .forHelp();
+            .forHelp();
     final OptionSpec<Integer> port = parser.acceptsAll(Arrays.asList("p", "port"),
-        "Specify the bind port to be used. The configuration bind port will be ignored.")
-        .withRequiredArg().ofType(Integer.class);
+                    "Specify the bind port to be used. The configuration bind port will be ignored.")
+            .withRequiredArg().ofType(Integer.class);
     final OptionSet set = parser.parse(args);
 
     this.help = set.has(help);

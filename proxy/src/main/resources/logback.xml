@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright (C) 2018 Velocity Contributors
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+-->
+
+<configuration>
+    <conversionRule conversionWord="minecraftFormatting"
+                    converterClass="net.minecrell.terminalconsole.MinecraftFormattingConverter"/>
+    <conversionRule conversionWord="highlightError"
+                    converterClass="net.minecrell.terminalconsole.HighlightErrorConverter"/>
+    <import class="ch.qos.logback.classic.PatternLayout"/>
+
+    <appender name="TERMINAL" class="net.minecrell.terminalconsole.TerminalConsoleAppender">
+        <layout class="net.minecrell.terminalconsole.util.LoggerNameLayoutSelector">
+            <nameExtractor class="net.minecrell.terminalconsole.util.LogbackClassicNameExtractor"/>
+            <defaultLayout class="PatternLayout">
+                <pattern>%highlightError([%d{HH:mm:ss} %level] [%logger{35}]: %minecraftFormatting(%msg){}%n%ex)
+                </pattern>
+            </defaultLayout>
+            <!-- Velocity doesn't need a prefix -->
+            <formatter>
+                <name>com.velocitypowered.</name>
+                <layout class="PatternLayout">
+                    <pattern>%highlightError([%d{HH:mm:ss} %level]: %minecraftFormatting(%msg){}%n%ex)</pattern>
+                </layout>
+            </formatter>
+        </layout>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/latest.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <maxFileSize>64MB</maxFileSize>
+            <fileNamePattern>logs/%d{yyyy-MM-dd}-%i.log.gz</fileNamePattern>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+        <encoder>
+            <pattern>[%d{HH:mm:ss}] [%t/%level]: %minecraftFormatting(%msg){strip}%n%ex</pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="TERMINAL"/>
+        <appender-ref ref="FILE"/>
+    </root>
+</configuration>

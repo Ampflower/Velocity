@@ -63,9 +63,9 @@ import java.security.GeneralSecurityException;
 import java.util.concurrent.TimeUnit;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * A utility class to make working with the pipeline a little less painful and transparently handles
@@ -73,7 +73,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  */
 public class MinecraftConnection extends ChannelInboundHandlerAdapter {
 
-  private static final Logger logger = LogManager.getLogger(MinecraftConnection.class);
+  private static final Logger logger = LoggerFactory.getLogger(MinecraftConnection.class);
 
   private final Channel channel;
   private SocketAddress remoteAddress;

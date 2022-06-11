@@ -30,13 +30,13 @@ import java.util.Optional;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.kyori.adventure.translation.GlobalTranslator;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public final class InitialInboundConnection implements InboundConnection,
     MinecraftConnectionAssociation {
 
-  private static final Logger logger = LogManager.getLogger(InitialInboundConnection.class);
+  private static final Logger logger = LoggerFactory.getLogger(InitialInboundConnection.class);
 
   private final MinecraftConnection connection;
   private final String cleanedAddress;

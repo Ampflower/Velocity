@@ -102,12 +102,12 @@ import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import net.kyori.adventure.title.Title.Times;
 import net.kyori.adventure.title.TitlePart;
 import net.kyori.adventure.translation.GlobalTranslator;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ConnectedPlayer implements MinecraftConnectionAssociation, Player {
 
@@ -120,7 +120,7 @@ public class ConnectedPlayer implements MinecraftConnectionAssociation, Player {
       .build();
   static final PermissionProvider DEFAULT_PERMISSIONS = s -> PermissionFunction.ALWAYS_UNDEFINED;
 
-  private static final Logger logger = LogManager.getLogger(ConnectedPlayer.class);
+  private static final Logger logger = LoggerFactory.getLogger(ConnectedPlayer.class);
 
   private final Identity identity = new IdentityImpl();
   /**

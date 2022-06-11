@@ -17,6 +17,7 @@
 
 package com.velocitypowered.proxy;
 
+import ch.qos.logback.classic.LoggerContext;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
@@ -80,7 +81,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.ResourceBundle;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
@@ -97,18 +97,17 @@ import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.translation.GlobalTranslator;
 import net.kyori.adventure.translation.TranslationRegistry;
-import net.kyori.adventure.util.UTF8ResourceBundleControl;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.asynchttpclient.AsyncHttpClient;
 import org.checkerframework.checker.nullness.qual.EnsuresNonNull;
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class VelocityServer implements ProxyServer, ForwardingAudience {
 
-  private static final Logger logger = LogManager.getLogger(VelocityServer.class);
+  private static final Logger logger = LoggerFactory.getLogger(VelocityServer.class);
   public static final Gson GENERAL_GSON = new GsonBuilder()
       .registerTypeHierarchyAdapter(Favicon.class, FaviconSerializer.INSTANCE)
       .registerTypeHierarchyAdapter(GameProfile.class, GameProfileSerializer.INSTANCE)
@@ -312,14 +311,12 @@ public class VelocityServer implements ProxyServer, ForwardingAudience {
       if (!configuration.validate()) {
         logger.error("Your configuration is invalid. Velocity will not start up until the errors "
             + "are resolved.");
-        LogManager.shutdown();
         System.exit(1);
       }
 
       commandManager.setAnnounceProxyCommands(configuration.isAnnounceProxyCommands());
     } catch (Exception e) {
       logger.error("Unable to read/load/save your velocity.toml. The server will shut down.", e);
-      LogManager.shutdown();
       System.exit(1);
     }
   }
@@ -394,7 +391,7 @@ public class VelocityServer implements ProxyServer, ForwardingAudience {
       ServerInfo newInfo =
           new ServerInfo(entry.getKey(), AddressUtil.parseAddress(entry.getValue()));
       Optional<RegisteredServer> rs = servers.getServer(entry.getKey());
-      if (!rs.isPresent()) {
+      if (rs.isEmpty()) {
         servers.register(newInfo);
       } else if (!rs.get().getServerInfo().equals(newInfo)) {
         for (Player player : rs.get().getPlayersConnected()) {
@@ -521,7 +518,7 @@ public class VelocityServer implements ProxyServer, ForwardingAudience {
       }
 
       // Since we manually removed the shutdown hook, we need to handle the shutdown ourselves.
-      LogManager.shutdown();
+      ((LoggerContext) LoggerFactory.getILoggerFactory()).stop();
 
       shutdown = true;
 

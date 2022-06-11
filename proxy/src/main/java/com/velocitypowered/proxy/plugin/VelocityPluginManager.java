@@ -50,12 +50,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class VelocityPluginManager implements PluginManager {
 
-  private static final Logger logger = LogManager.getLogger(VelocityPluginManager.class);
+  private static final Logger logger = LoggerFactory.getLogger(VelocityPluginManager.class);
 
   private final Map<String, PluginContainer> pluginsById = new LinkedHashMap<>();
   private final Map<Object, PluginContainer> pluginInstances = new IdentityHashMap<>();

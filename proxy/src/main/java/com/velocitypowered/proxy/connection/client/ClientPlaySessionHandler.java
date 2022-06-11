@@ -72,9 +72,9 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Handles communication with the connected Minecraft client. This is effectively the primary nerve
@@ -82,7 +82,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  */
 public class ClientPlaySessionHandler implements MinecraftSessionHandler {
 
-  private static final Logger logger = LogManager.getLogger(ClientPlaySessionHandler.class);
+  private static final Logger logger = LoggerFactory.getLogger(ClientPlaySessionHandler.class);
 
   private final ConnectedPlayer player;
   private boolean spawned = false;

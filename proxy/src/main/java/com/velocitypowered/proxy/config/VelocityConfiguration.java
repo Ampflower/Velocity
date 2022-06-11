@@ -28,7 +28,6 @@ import com.google.gson.annotations.Expose;
 import com.velocitypowered.api.proxy.config.ProxyConfig;
 import com.velocitypowered.api.util.Favicon;
 import com.velocitypowered.proxy.util.AddressUtil;
-
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.io.File;
 import java.io.IOException;
@@ -48,14 +47,14 @@ import java.util.Optional;
 import java.util.Random;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class VelocityConfiguration implements ProxyConfig {
 
-  private static final Logger logger = LogManager.getLogger(VelocityConfiguration.class);
+  private static final Logger logger = LoggerFactory.getLogger(VelocityConfiguration.class);
 
   @Expose private String bind = "0.0.0.0:25577";
   @Expose private String motd = "&3A Velocity Server";

@@ -18,7 +18,6 @@
 package com.velocitypowered.proxy;
 
 import com.velocitypowered.proxy.config.VelocityConfiguration;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -26,9 +25,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.bstats.MetricsBase;
 import org.bstats.charts.CustomChart;
 import org.bstats.charts.DrilldownPie;
@@ -36,6 +32,8 @@ import org.bstats.charts.SimplePie;
 import org.bstats.charts.SingleLineChart;
 import org.bstats.config.MetricsConfig;
 import org.bstats.json.JsonObjectBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Metrics {
 
@@ -99,7 +97,7 @@ public class Metrics {
 
   static class VelocityMetrics {
 
-    private static final Logger logger = LogManager.getLogger(Metrics.class);
+    private static final Logger logger = LoggerFactory.getLogger(Metrics.class);
 
     static void startMetrics(VelocityServer server, VelocityConfiguration.Metrics metricsConfig) {
       Metrics metrics = new Metrics(logger, 4752, metricsConfig.isEnabled());

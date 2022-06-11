@@ -39,15 +39,15 @@ import com.velocitypowered.proxy.protocol.packet.PluginMessage;
 import com.velocitypowered.proxy.protocol.util.PluginMessageUtil;
 import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * A special session handler that catches "last minute" disconnects.
  */
 public class TransitionSessionHandler implements MinecraftSessionHandler {
 
-  private static final Logger logger = LogManager.getLogger(TransitionSessionHandler.class);
+  private static final Logger logger = LoggerFactory.getLogger(TransitionSessionHandler.class);
 
   private final VelocityServer server;
   private final VelocityServerConnection serverConn;

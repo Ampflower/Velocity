@@ -46,8 +46,7 @@ import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
-
-import org.apache.logging.log4j.LogManager;
+import org.slf4j.LoggerFactory;
 
 public class GS4QueryHandler extends SimpleChannelInboundHandler<DatagramPacket> {
 
@@ -183,8 +182,8 @@ public class GS4QueryHandler extends SimpleChannelInboundHandler<DatagramPacket>
               ctx.writeAndFlush(responsePacket, ctx.voidPromise());
             }, ctx.channel().eventLoop())
             .exceptionally((ex) -> {
-              LogManager.getLogger(getClass()).error(
-                  "Exception while writing GS4 response for query from {}", senderAddress, ex);
+              LoggerFactory.getLogger(getClass()).error(
+                      "Exception while writing GS4 response for query from {}", senderAddress, ex);
               return null;
             });
         break;
@@ -265,7 +264,7 @@ public class GS4QueryHandler extends SimpleChannelInboundHandler<DatagramPacket>
       if (isBasic) {
         return;
       }
-      
+
       StringBuilder pluginsString = new StringBuilder();
       pluginsString.append(serverVersion).append(':').append(' ');
       Iterator<QueryResponse.PluginInformation> iterator = plugins.iterator();

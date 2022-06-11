@@ -40,20 +40,20 @@ import io.netty.util.concurrent.GlobalEventExecutor;
 import java.net.InetSocketAddress;
 import java.util.HashMap;
 import java.util.Map;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.asynchttpclient.AsyncHttpClient;
 import org.asynchttpclient.RequestBuilder;
 import org.asynchttpclient.filter.FilterContext;
 import org.asynchttpclient.filter.FilterContext.FilterContextBuilder;
 import org.asynchttpclient.filter.RequestFilter;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public final class ConnectionManager {
 
   private static final WriteBufferWaterMark SERVER_WRITE_MARK = new WriteBufferWaterMark(1 << 20,
-      1 << 21);
-  private static final Logger LOGGER = LogManager.getLogger(ConnectionManager.class);
+          1 << 21);
+  private static final Logger LOGGER = LoggerFactory.getLogger(ConnectionManager.class);
   private final Map<InetSocketAddress, Endpoint> endpoints = new HashMap<>();
   private final TransportType transportType;
   private final EventLoopGroup bossGroup;

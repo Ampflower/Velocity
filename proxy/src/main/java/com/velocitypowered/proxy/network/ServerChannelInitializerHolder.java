@@ -20,12 +20,12 @@ package com.velocitypowered.proxy.network;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;
 import java.util.function.Supplier;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ServerChannelInitializerHolder implements Supplier<ChannelInitializer<Channel>> {
 
-  private static final Logger LOGGER = LogManager.getLogger(ConnectionManager.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(ConnectionManager.class);
   private ChannelInitializer<Channel> initializer;
 
   ServerChannelInitializerHolder(final ChannelInitializer<Channel> initializer) {

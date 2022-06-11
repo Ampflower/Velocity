@@ -53,19 +53,18 @@ import io.netty.buffer.ByteBufUtil;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.Channel;
 import io.netty.handler.timeout.ReadTimeoutException;
-
 import java.util.regex.Pattern;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class BackendPlaySessionHandler implements MinecraftSessionHandler {
 
   private static final Pattern PLAUSIBLE_SHA1_HASH = Pattern.compile("^[a-z0-9]{40}$");
-  private static final Logger logger = LogManager.getLogger(BackendPlaySessionHandler.class);
+  private static final Logger logger = LoggerFactory.getLogger(BackendPlaySessionHandler.class);
   private static final boolean BACKPRESSURE_LOG = Boolean
-      .getBoolean("velocity.log-server-backpressure");
+          .getBoolean("velocity.log-server-backpressure");
   private static final int MAXIMUM_PACKETS_TO_FLUSH = Integer
-      .getInteger("velocity.max-packets-per-flush", 8192);
+          .getInteger("velocity.max-packets-per-flush", 8192);
 
   private final VelocityServer server;
   private final VelocityServerConnection serverConn;

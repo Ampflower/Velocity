@@ -42,9 +42,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.locks.Lock;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.checkerframework.checker.lock.qual.GuardedBy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Provides suggestions for a given command input.
@@ -57,7 +57,7 @@ import org.checkerframework.checker.lock.qual.GuardedBy;
  */
 final class SuggestionsProvider<S> {
 
-  private static final Logger LOGGER = LogManager.getLogger(SuggestionsProvider.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(SuggestionsProvider.class);
 
   private static final StringRange ALIAS_SUGGESTION_RANGE = StringRange.at(0);
 

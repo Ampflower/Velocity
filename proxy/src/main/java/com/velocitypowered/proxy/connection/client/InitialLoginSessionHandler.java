@@ -46,18 +46,18 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ThreadLocalRandom;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.asynchttpclient.ListenableFuture;
 import org.asynchttpclient.Response;
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class InitialLoginSessionHandler implements MinecraftSessionHandler {
 
-  private static final Logger logger = LogManager.getLogger(InitialLoginSessionHandler.class);
+  private static final Logger logger = LoggerFactory.getLogger(InitialLoginSessionHandler.class);
   private static final String MOJANG_HASJOINED_URL =
-      System.getProperty("mojang.sessionserver", "https://sessionserver.mojang.com/session/minecraft/hasJoined")
-          .concat("?username=%s&serverId=%s");
+          System.getProperty("mojang.sessionserver", "https://sessionserver.mojang.com/session/minecraft/hasJoined")
+                  .concat("?username=%s&serverId=%s");
 
   private final VelocityServer server;
   private final MinecraftConnection mcConnection;

@@ -27,7 +27,7 @@ import com.velocitypowered.proxy.VelocityServer;
 import com.velocitypowered.proxy.util.ClosestLocaleMatcher;
 import java.util.List;
 import java.util.Locale;
-
+import gay.ampflower.velocity.misc.PrintWrapper;
 import net.kyori.adventure.audience.MessageType;
 import net.kyori.adventure.identity.Identity;
 import net.kyori.adventure.permission.PermissionChecker;
@@ -39,19 +39,18 @@ import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.kyori.adventure.translation.GlobalTranslator;
 import net.minecrell.terminalconsole.SimpleTerminalConsole;
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.io.IoBuilder;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.jetbrains.annotations.NotNull;
 import org.jline.reader.Candidate;
 import org.jline.reader.LineReader;
 import org.jline.reader.LineReaderBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.event.Level;
 
 public final class VelocityConsole extends SimpleTerminalConsole implements ConsoleCommandSource {
 
-  private static final Logger logger = LogManager.getLogger(VelocityConsole.class);
+  private static final Logger logger = LoggerFactory.getLogger(VelocityConsole.class);
 
   private final VelocityServer server;
   private PermissionFunction permissionFunction = ALWAYS_TRUE;
@@ -79,11 +78,11 @@ public final class VelocityConsole extends SimpleTerminalConsole implements Cons
   }
 
   /**
-   * Sets up {@code System.out} and {@code System.err} to redirect to log4j.
+   * Sets up {@code System.out} and {@code System.err} to redirect to SLF4J.
    */
   public void setupStreams() {
-    System.setOut(IoBuilder.forLogger(logger).setLevel(Level.INFO).buildPrintStream());
-    System.setErr(IoBuilder.forLogger(logger).setLevel(Level.ERROR).buildPrintStream());
+    System.setOut(new PrintWrapper(logger, Level.INFO));
+    System.setErr(new PrintWrapper(logger, Level.ERROR));
   }
 
   /**

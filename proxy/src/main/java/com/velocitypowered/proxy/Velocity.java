@@ -20,16 +20,17 @@ package com.velocitypowered.proxy;
 import io.netty.util.ResourceLeakDetector;
 import io.netty.util.ResourceLeakDetector.Level;
 import java.text.DecimalFormat;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.bridge.SLF4JBridgeHandler;
 
 public class Velocity {
 
   private static final Logger logger;
 
   static {
-    System.setProperty("java.util.logging.manager", "org.apache.logging.log4j.jul.LogManager");
-    logger = LogManager.getLogger(Velocity.class);
+    SLF4JBridgeHandler.install();
+    logger = LoggerFactory.getLogger(Velocity.class);
 
     // We use BufferedImage for favicons, and on macOS this puts the Java application in the dock.
     // How inconvenient. Force AWT to work with its head chopped off.

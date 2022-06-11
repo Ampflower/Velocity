@@ -19,7 +19,6 @@ package com.velocitypowered.proxy.command.builtin;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
-
 import com.google.common.collect.ImmutableSet;
 import com.google.common.util.concurrent.MoreExecutors;
 import com.google.gson.JsonArray;
@@ -36,7 +35,6 @@ import com.velocitypowered.api.proxy.server.RegisteredServer;
 import com.velocitypowered.api.util.ProxyVersion;
 import com.velocitypowered.proxy.VelocityServer;
 import com.velocitypowered.proxy.util.InformationUtils;
-
 import java.net.ConnectException;
 import java.net.UnknownHostException;
 import java.nio.charset.StandardCharsets;
@@ -47,7 +45,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
-
 import net.kyori.adventure.identity.Identity;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
@@ -57,13 +54,13 @@ import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.asynchttpclient.AsyncHttpClient;
 import org.asynchttpclient.BoundRequestBuilder;
 import org.asynchttpclient.ListenableFuture;
 import org.asynchttpclient.Response;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class VelocityCommand implements SimpleCommand {
 
@@ -172,7 +169,7 @@ public class VelocityCommand implements SimpleCommand {
 
   private static class Reload implements SubCommand {
 
-    private static final Logger logger = LogManager.getLogger(Reload.class);
+    private static final Logger logger = LoggerFactory.getLogger(Reload.class);
     private final VelocityServer server;
 
     private Reload(VelocityServer server) {
@@ -340,7 +337,7 @@ public class VelocityCommand implements SimpleCommand {
 
   private static class Dump implements SubCommand {
 
-    private static final Logger logger = LogManager.getLogger(Dump.class);
+    private static final Logger logger = LoggerFactory.getLogger(Dump.class);
     private final ProxyServer server;
 
     private Dump(ProxyServer server) {
