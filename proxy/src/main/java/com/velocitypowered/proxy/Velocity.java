@@ -17,8 +17,6 @@
 
 package com.velocitypowered.proxy;
 
-import io.netty.util.ResourceLeakDetector;
-import io.netty.util.ResourceLeakDetector.Level;
 import java.text.DecimalFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,7 +43,7 @@ public class Velocity {
     // Disable the resource leak detector by default as it reduces performance. Allow the user to
     // override this if desired.
     if (System.getProperty("io.netty.leakDetection.level") == null) {
-      ResourceLeakDetector.setLevel(Level.DISABLED);
+      System.setProperty("io.netty.noResourceLeakDetection", "true");
     }
   }
 

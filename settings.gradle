@@ -1,3 +1,9 @@
+pluginManagement {
+    repositories {
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
 rootProject.name = 'velocity'
 include(
         'api',

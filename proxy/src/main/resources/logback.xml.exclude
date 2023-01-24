@@ -40,7 +40,7 @@
         </layout>
     </appender>
 
-    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <!--appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>logs/latest.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <maxFileSize>64MB</maxFileSize>
@@ -50,10 +50,10 @@
         <encoder>
             <pattern>[%d{HH:mm:ss}] [%t/%level]: %minecraftFormatting(%msg){strip}%n%ex</pattern>
         </encoder>
-    </appender>
+    </appender-->
 
     <root level="INFO">
         <appender-ref ref="TERMINAL"/>
-        <appender-ref ref="FILE"/>
+        <!--appender-ref ref="FILE"/-->
     </root>
 </configuration>
